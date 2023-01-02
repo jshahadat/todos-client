@@ -10,7 +10,8 @@ const TodoList = () => {
             .then(res => res.json())
             .then(data => setAllTodos(data))
     }, [])
-    const handleMakeVerified = id => {
+
+    const handleMakeComplete = id => {
         fetch(`https://todos-server-iota.vercel.app/todos/${id}`, {
             method: 'PUT',
         })
@@ -22,7 +23,8 @@ const TodoList = () => {
                 }
             })
     }
-    const handleDeleteSeller = id => {
+
+    const handleDeleteTodo = id => {
         const proceed = window.confirm('Are you Sure?');
         if (proceed) {
             fetch(`https://todos-server-iota.vercel.app/todos/${id}`, {
@@ -40,6 +42,7 @@ const TodoList = () => {
                 })
         }
     }
+
     return (
         <div className='lg:pr-20 lg:pl-20 ml-3 mr-3'>
             <div className="overflow-x-auto">
@@ -80,11 +83,11 @@ const TodoList = () => {
                                         </>
                                         :
                                         <>
-                                            <td><button onClick={() => handleMakeVerified(allTodo._id)} className='btn btn-xs btn-primary'>No</button></td>
+                                            <td><button onClick={() => handleMakeComplete(allTodo._id)} className='btn btn-xs btn-primary'>No</button></td>
                                         </>
                                 }
                                 <td><Link to={allTodo._id}><button className='btn btn-xs btn-danger'>Edit</button></Link></td>
-                                <td><button onClick={() => handleDeleteSeller(allTodo._id)} className='btn btn-xs btn-danger'>Delete</button></td>
+                                <td><button onClick={() => handleDeleteTodo(allTodo._id)} className='btn btn-xs btn-danger'>Delete</button></td>
                             </tr>)
                         }
                     </tbody>
